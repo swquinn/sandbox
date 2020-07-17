@@ -1,0 +1,23 @@
+# IDEs: vscode, etc.
+.history/
+.ignore/
+.vscode/*
+!.vscode/settings.json
+*.scratch
+
+#
+.env
+
+# Python/FastAPI
+node_modules/
+__pycache__/
+
+# PHP/Symfony
+.env.local
+.env.local.php
+.env.*.local
+config/secrets/prod/prod.decrypt.private.php
+public/bundles/
+var/
+vendor/
+
