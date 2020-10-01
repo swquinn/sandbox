@@ -4,3 +4,7 @@
 index:
   path: /
   controller: App\Controller\DefaultController::index
+
+hello:
+  path: /api/hello
+  controller: App\Controller\DefaultController::hello
