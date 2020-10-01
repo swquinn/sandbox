@@ -7,7 +7,8 @@ authors = ["Sean Quinn"]
 [tool.poetry.dependencies]
 python = "^3.8"
 fastapi = "^0.59.0"
-uvicorn = "^0.11.5"
+uvicorn = {extras = ["watchgodreload"], version = "^0.11.8"}
+jinja2 = "^2.11.2"
 
 [tool.poetry.dev-dependencies]
 
