@@ -1,5 +1,5 @@
 #!/bin/sh
-set -e
+set -eu
 
 ENTRYPOINT=/usr/bin/supervisord
 SITES_DIR=/etc/nginx/sites
@@ -86,7 +86,7 @@ enable_available_sites
 enable_xdebug
 
 log "[INFO ] Starting web server"
-log "[INFO ] $(date +'%b %d, %Y %H:%M:%S %z (%l:%M:%S %p %Z)')"
+log "[INFO ] $(date +'%b %d, %Y %H:%M:%S %z (%I:%M:%S %p %Z)')"
 log "[DEBUG] > $ENTRYPOINT $@"
 
 $ENTRYPOINT "$@"

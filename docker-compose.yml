@@ -1,0 +1,62 @@
+version: "3.7"
+
+services:
+
+  #: HAProxy
+  #: =======
+  #:
+  #: What is it used for?
+  #:   We're using HAProxy to act as the loadbalancer for multiple services
+  #:   that are being started using Docker. This is allowing us to bring up
+  #:   the FastAPI and Symfony test sites side by side for comparison.
+  haproxy:
+    build:
+      context: ./docker/haproxy/
+      dockerfile: Dockerfile
+    image: sandbox/haproxy
+    container_name: sandbox_haproxy
+    depends_on:
+      - app_fastapi
+      - app_symfony
+    networks:
+      default:
+        aliases:
+          - app-dev.sandbox.com
+          - dev.sandbox.com
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - ENABLE_LOGGING=1
+
+  #: App FastAPI
+  #: ===========
+  app_fastapi:
+    build:
+      context: ./app-fastapi
+      dockerfile: Dockerfile
+    image: sandbox/fastapi-nginx-server-app
+    container_name: app_fastapi
+    volumes:
+      - ./app-fastapi:/srv/www/app.sandbox.com
+      - ./web/public/build:/srv/www/app.sandbox.com/public/build
+    environment:
+      SANDBOX_APPLICATION_ENVIRONMENT: dev
+
+  #: App Symfony
+  #: ===========
+  app_symfony:
+    build:
+      context: ./app-symfony
+      dockerfile: Dockerfile
+    image: sandbox/symfony-nginx-server-app
+    container_name: app_symfony
+    volumes:
+      - ./app-symfony:/srv/www/app.sandbox.com
+      - ./web/public/build:/srv/www/app.sandbox.com/public/build
+    environment:
+      ENABLE_XDEBUG: "true"
+      SANDBOX_APPLICATION_ENVIRONMENT: dev
+      SYMFONY_CACHE_DIR: /var/cache/www/sandbox-server-app
+      SYMFONY_LOGS_DIR: /var/log/www/sandbox-server-app
+      XDEBUG_CONFIG: ECLIPSE_DBGP

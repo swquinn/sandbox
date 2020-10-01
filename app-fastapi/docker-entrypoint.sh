@@ -1,5 +1,5 @@
 #!/bin/sh
-set -e
+set -eup
 
 ENTRYPOINT=/usr/bin/supervisord
 SITES_DIR=/etc/nginx/sites
@@ -35,7 +35,7 @@ install() {
 log() {
   message=$1
   time=$(date +"%F %T %Z")
-  echo -e $time $1
+  echo $time $1
 }
 
 
@@ -70,7 +70,7 @@ enable_available_sites() {
 }
 
 #: Visually separate breaks in log activity.
-echo -e "\n\n"
+echo "\n\n"
 
 log "[INFO ] Activating available nginx sites"
 install
