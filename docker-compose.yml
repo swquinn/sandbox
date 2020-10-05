@@ -18,10 +18,13 @@ services:
     depends_on:
       - app_fastapi
       - app_symfony
+      - cdn
     networks:
       default:
         aliases:
           - app-dev.sandbox.com
+          - cdn.sandbox.com
+          - cdn-dev.sandbox.com
           - dev.sandbox.com
     ports:
       - 80:80
@@ -37,6 +40,9 @@ services:
       dockerfile: Dockerfile
     image: sandbox/fastapi-nginx-server-app
     container_name: app_fastapi
+    depends_on:
+      - database
+      - mongodb
     volumes:
       - ./app-fastapi:/srv/www/app.sandbox.com
       - ./web/public/build:/srv/www/app.sandbox.com/public/build
@@ -51,6 +57,9 @@ services:
       dockerfile: Dockerfile
     image: sandbox/symfony-nginx-server-app
     container_name: app_symfony
+    depends_on:
+      - database
+      - mongodb
     volumes:
       - ./app-symfony:/srv/www/app.sandbox.com
       - ./web/public/build:/srv/www/app.sandbox.com/public/build
@@ -60,3 +69,38 @@ services:
       SYMFONY_CACHE_DIR: /var/cache/www/sandbox-server-app
       SYMFONY_LOGS_DIR: /var/log/www/sandbox-server-app
       XDEBUG_CONFIG: ECLIPSE_DBGP
+
+  cdn:
+    build:
+      context: ./cdn
+      dockerfile: Dockerfile
+    image: sanbox/cdn
+    container_name: cdn
+    volumes:
+      - ./cdn/logs:/srv/www/cdn.sandbox.com/logs
+      - ./web/public/build:/srv/www/cdn.sandbox.com/public
+    #command: [nginx-debug, '-g', 'daemon off;']
+
+  #: Database (PostgreSQL)
+  #: =====================
+  database:
+    image: postgres:12-alpine
+    container_name: sandbox_database
+    ports:
+      - 5432:5432
+    volumes:
+      - ${POSTGRES_DATA_DIR:-~/db/sandbox/data}:/var/lib/postgresql/data
+
+  #: Database (MongoDB)
+  #: =====================
+  mongodb:
+    image: mongo
+    container_name: sandbox_mongodb
+    ports:
+      - 27017:27017
+    volumes:
+      - ${MONGODB_DATA_DIR:-~/db/sandbox_mongodb/data}:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_DB_USER:-root}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_DB_PASSWORD:-root}
+      MONGO_INITDB_DATABASE: ${MONGO_DB_DATABASE:-sandbox}

@@ -87,6 +87,9 @@ logs:
 .PHONY: rebuild
 rebuild: stop build clean
 
+.PHONY: shell.cdn
+shell.cdn:
+	@docker exec -it cdn /bin/bash
 
 .PHONY: shell.fastapi
 shell.fastapi:
