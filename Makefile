@@ -56,7 +56,7 @@ build:
 	@/bin/sh ./docker/python/fastapi-python-3.8/setup.sh
 	@/bin/sh ./docker/nginx/nginx-fastapi-python-3.8/setup.sh
 	@/bin/sh ./docker/nginx/nginx-symfony-php-7.4/setup.sh
-	@docker-compose build
+	@docker compose build
 
 ### <summary>
 ### </summary>
@@ -78,7 +78,7 @@ list: help
 
 .PHONY: logs
 logs:
-	@docker-compose logs -f
+	@docker compose logs -f
 
 
 ### Rebuild all images.
@@ -106,7 +106,7 @@ shell.symfony:
 ### </summary>
 .PHONY: start
 start:
-	@docker-compose \
+	@docker compose \
 		-f $(ROOT_DIR)/docker-compose.yml \
 		up -d app_symfony haproxy
 
@@ -115,7 +115,7 @@ start:
 ### </summary>
 .PHONY: start.debug
 start.debug:
-	@docker-compose \
+	@docker compose \
 		-f $(ROOT_DIR)/docker-compose.yml \
 		up app_symfony haproxy
 
@@ -124,7 +124,7 @@ start.debug:
 ### </summary>
 .PHONY: status
 status:
-	@docker-compose \
+	@docker compose \
 		-f $(ROOT_DIR)/docker-compose.yml \
 		ps
 
@@ -134,7 +134,7 @@ status:
 .PHONY: stop
 stop:
 	@echo "> Stopping services..."
-	@docker-compose \
+	@docker compose \
 		-f $(ROOT_DIR)/docker-compose.yml \
 		down
 
