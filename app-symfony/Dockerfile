@@ -13,6 +13,7 @@ COPY config/nginx/conf.d/gzip.conf /etc/nginx/conf.d/gzip.conf
 COPY config/nginx/conf.d/php-fpm.conf /etc/nginx/conf.d/php-fpm.conf
 COPY config/nginx/conf.d/requests.conf /etc/nginx/conf.d/requests.conf
 COPY config/nginx/sites/app.sandbox.com /etc/nginx/sites/app.sandbox.com
+COPY . /srv/www/app.sandbox.com
 
 RUN rm -rf /etc/nginx/conf.d/default.conf \
  && mkdir -p /var/lib/nginx \
