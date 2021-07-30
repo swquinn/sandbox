@@ -1,0 +1,59 @@
+{
+  "root": true,
+  "parser": "babel-eslint",
+  "extends": ["standard", "standard-react", "airbnb"],
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true
+  },
+  "globals": {
+    "expect": false,
+    "assert": false,
+    "sinon": false,
+    "__WEBPACK__": false,
+    "__DEVTOOLS__": false,
+  },
+  "plugins": ["standard", "babel", "react"],
+  "rules": {
+    "curly": ["error", "multi-line"],
+    "object-curly-spacing": ["error", "always"],
+    "operator-linebreak": 0,
+    "semi": ["error", "always"],
+    "keyword-spacing": [
+      "error",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    "space-before-function-paren": ["error", "never"],
+    "arrow-parens": 0,
+    "babel/arrow-parens": [2, "always"],
+    "react/prop-types": [
+      2,
+      {
+        "ignore": ["css"]
+      }
+    ],
+    "jsx-quotes": [2, "prefer-double"],
+    "react/destructuring-assignment": 0,
+    "react/jsx-filename-extension": 0,
+    "react/forbid-prop-types": 0,
+    "react/no-danger": 0,
+    "react/jsx-fragments": 0,
+    "react/jsx-one-expression-per-line": 0,
+    "import/no-named-as-default": 0,
+    "no-use-before-define": 0,
+    "no-prototype-builtins": 0,
+    "no-unused-expressions": 0,
+    "no-extraneous-imports": 0,
+    "import/prefer-default-export": 0,
+    "class-methods-use-this": 0,
+    "max-len": [
+      "warn",
+      {
+        "code": 80
+      }
+    ]
+}

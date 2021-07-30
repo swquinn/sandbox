@@ -9,7 +9,6 @@
 .env
 
 # Python/FastAPI
-node_modules/
 __pycache__/
 
 # PHP/Symfony
@@ -21,3 +20,6 @@ public/bundles/
 var/
 vendor/
 
+# JavaScript / Node / React
+node_modules/
+web/public/build/

@@ -1,0 +1,14 @@
+.root {
+    flex-grow: 1;
+}
+
+.debugBox {
+    background-color: lime;
+    height: 200vh;
+}
+
+.paper {
+    padding: 10px;
+    text-align: 'center';
+    color: pink;
+}

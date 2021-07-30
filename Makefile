@@ -42,6 +42,8 @@ help:
 	@echo "  status                Show the status of all containers."
 	@echo "  stop                  Stops and removes all service containers, "
 	@echo "                        networks, images, and volumes."
+	@echo "  ui                    Install dependencies using yarn and build the UI."
+	@echo "  ui.build              Build the UI dependencies."
 	@echo ""
 
 
@@ -135,6 +137,33 @@ stop:
 	@docker-compose \
 		-f $(ROOT_DIR)/docker-compose.yml \
 		down
+
+### <summary>
+### </summary>
+.PHONY: ui ui.build
+ui: .yarn ui.build
+ui.build:
+	@echo "> Running production webpack build..."
+	@yarn --cwd $(ROOT_DIR)/web \
+		  run build 
+
+
+### <summary>
+### </summary>
+.PHONY: ui.dev ui.dev-build
+ui.dev: .yarn ui.dev-build
+ui.dev-build:
+	@echo "> Running development webpack build..."
+	@yarn --cwd $(ROOT_DIR)/web \
+	      run build-watch
+
+
+### <summary>
+### </summary>
+.PHONY: .yarn
+.yarn:
+	@yarn
+
 
 
 ### Catch all. Do nothing if we haven't matched at target

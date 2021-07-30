@@ -1,0 +1,40 @@
+{
+  "rules": {
+    "block-no-empty": true,
+    "color-no-invalid-hex": true,
+    "comment-no-empty": true,
+    "declaration-no-important": true,
+    "declaration-colon-space-after": "always",
+    "declaration-colon-space-before": "never",
+    "declaration-property-value-blacklist": {
+      "composes": ["/^.*/"],
+      "float": ["none", "left", "right"]
+    },
+    "indentation": [
+      2
+    ],
+    "max-empty-lines": 2,
+    "media-feature-name-no-unknown": true,
+    "no-descending-specificity": true,
+    "no-eol-whitespace": true,
+    "rule-empty-line-before": [
+      "always",
+      {
+        "except": ["first-nested"],
+        "ignore": ["after-comment"]
+      }
+    ],
+    "unit-whitelist": ["em", "rem", "%", "s", "px", "vh", "vw"]
+  },
+  "property-no-vendor-prefix": true,
+  "selector-pseudo-class-no-unknown": [
+    true,
+    {
+      "ignorePseudoClasses": ["global"]
+    }
+  ],
+  "value-list-comma-space-after": "always-single-line",
+  "value-list-comma-space-before": "always-single-line",
+  "value-list-comma-newline-after": "always-multi-line",
+  "value-list-comma-newline-before": "always-multi-line"
+}
