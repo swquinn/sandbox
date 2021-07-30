@@ -5,8 +5,11 @@
 !.vscode/settings.json
 *.scratch
 
-#
+# Environment
 .env
+.env.local
+.env.local.php
+.env.*.local
 
 # Python/FastAPI
 __pycache__/
